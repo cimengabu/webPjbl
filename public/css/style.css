@@ -1,0 +1,257 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #1db954 0%, #191414 100%);
+    min-height: 100vh;
+    /* Pakai min-height biar kalau konten panjang gak tumpang tindih */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    margin: 0;
+}
+
+/* Biar link login/register di pojok atau lebih rapi */
+nav {
+    width: 100%;
+    padding: 20px;
+    text-align: right;
+    position: absolute;
+    top: 0;
+}
+
+nav a {
+    color: white;
+    margin-left: 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.eco-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    max-width: 500px;
+}
+
+h1 {
+    margin-bottom: 10px;
+}
+
+p {
+    color: #ccc;
+    margin-bottom: 30px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.btn-main {
+    background: #1db954;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-main:hover {
+    transform: scale(1.05);
+    background: #1ed760;
+}
+
+/* Styling buat form Register/Login */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #fff;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.mt-4 {
+    margin-top: 20px;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Style untuk tombol submit di dalam form */
+button,
+.btn-main {
+    margin-top: 20px;
+    background: #1db954;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    /* Biar tombolnya panjang seukuran input */
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #1ed760;
+    transform: translateY(-2px);
+}
+
+/* Link "Already registered?" biar gak biru garis bawah banget */
+a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.8rem;
+}
+
+a:hover {
+    color: white;
+}
+
+.dashboard-container {
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.welcome-section {
+    margin-bottom: 30px;
+    text-align: left;
+    width: 100%;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.stat-card.highlight {
+    background: rgba(29, 185, 84, 0.2);
+    border: 1px solid rgba(29, 185, 84, 0.4);
+}
+
+.stat-card h3 {
+    font-size: 1.8rem;
+    margin: 10px 0 5px;
+}
+
+.icon {
+    font-size: 2rem;
+}
+
+.action-card {
+    max-width: 100% !important;
+    text-align: left !important;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+body {
+    background: linear-gradient(135deg, #1db954 0%, #191414 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column; /* INI BIAR JUDUL DI ATAS, CARD DI BAWAH */
+    justify-content: center;
+    align-items: center;
+    gap: 20px; 
+    margin: 0;
+    color: white;
+}
+
+.eco-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    padding: 40px;
+    width: 350px; /* Kita pas-kan ukurannya */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* Biar tombolnya cantik dan panjang */
+button, .btn-main {
+    background: #1db954 !important;
+    color: white !important;
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    font-weight: bold;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.logo-container {
+    position: relative;
+    z-index: 2; /* Angka lebih tinggi agar di depan */
+}
+
+.register-card {
+    position: relative;
+    z-index: 1; /* Angka lebih rendah agar di belakang logo */
+}
+.main-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px; /* Jarak antara tulisan EcoTrack dan Form */
+    height: 100vh;
+}
