@@ -4,24 +4,18 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+// NOTE: Migration ini duplikat dari 2026_05_11_041755_create_reports_table.php
+// Dibiarkan kosong agar tidak menyebabkan error "Table already exists"
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('reports', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+        // Tabel reports sudah dibuat di migration sebelumnya (2026_05_11_041755)
+        // Migration ini sengaja dikosongkan untuk menghindari duplikasi
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('reports');
+        // No-op
     }
 };

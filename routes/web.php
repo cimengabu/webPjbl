@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EcoTrackController;
+use App\Http\Controllers\RecyclingCenterController;
 use Illuminate\Support\Facades\Route;
 
 // Halaman Utama langsung ke EcoTrack
@@ -13,7 +14,13 @@ Route::prefix('ecotrack')->group(function () {
     Route::delete('/delete/{id}', [EcoTrackController::class, 'destroy'])->name('ecotrack.destroy');
 });
 
+Route::get('/recycling-centers', [RecyclingCenterController::class, 'index'])->name('recycling-centers.index');
+
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
