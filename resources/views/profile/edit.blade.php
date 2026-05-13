@@ -65,7 +65,7 @@
                         <h2 class="text-7xl font-black mb-2 tracking-tighter">{{ number_format($totalPoints, 0, ',', '.') }}</h2>
                         <p class="text-emerald-100/70 mb-8 font-medium text-lg max-w-[80%]">Tukarkan poin Anda dengan berbagai hadiah menarik di Bank Sampah terdekat.</p>
                         
-                        <button onclick="alert('Fitur Redeem Point akan segera hadir!')" class="bg-[#050B14] text-emerald-400 border border-emerald-500/50 px-8 py-4 rounded-2xl font-black text-lg hover:bg-emerald-900/50 transition-colors active:scale-95 w-full flex items-center justify-center gap-2">
+                        <button onclick="openRedeemModal()" class="bg-[#050B14] text-emerald-400 border border-emerald-500/50 px-8 py-4 rounded-2xl font-black text-lg hover:bg-emerald-900/50 transition-colors active:scale-95 w-full flex items-center justify-center gap-2">
                             <span>Redeem Points</span>
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                         </button>
@@ -155,4 +155,81 @@
 
         </div>
     </div>
+
+    {{-- Redeem Modal --}}
+    <div id="modal-redeem" class="fixed inset-0 bg-black/90 backdrop-blur-md hidden items-center justify-center z-50 p-4 transition-all opacity-0 duration-300">
+        <div class="bg-zinc-900 border border-emerald-500/30 p-8 rounded-[2.5rem] w-full max-w-sm shadow-[0_0_100px_rgba(16,185,129,0.2)] text-center transform scale-95 transition-transform duration-300" id="modal-redeem-content">
+            <div class="w-20 h-20 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg class="w-10 h-10 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path></svg>
+            </div>
+            <h3 class="text-2xl font-black italic text-white uppercase tracking-tighter mb-2">Tukar Poin</h3>
+            <p class="text-gray-400 text-sm mb-6">Pilih hadiah yang ingin Anda tukarkan dengan Eco-Points Anda.</p>
+            
+            <div class="space-y-3 mb-8 text-left">
+                <button onclick="processRedeem('Voucher Belanja Rp 50.000')" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl hover:bg-emerald-500/20 hover:border-emerald-500/50 transition-all flex items-center justify-between group">
+                    <div>
+                        <p class="text-white font-bold text-sm">Voucher Belanja</p>
+                        <p class="text-emerald-400 font-mono text-xs">Rp 50.000</p>
+                    </div>
+                    <span class="text-xs font-black text-gray-500 group-hover:text-emerald-400 bg-white/5 px-2 py-1 rounded">5.000 PTS</span>
+                </button>
+                <button onclick="processRedeem('Token Listrik Rp 100.000')" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl hover:bg-emerald-500/20 hover:border-emerald-500/50 transition-all flex items-center justify-between group">
+                    <div>
+                        <p class="text-white font-bold text-sm">Token Listrik</p>
+                        <p class="text-emerald-400 font-mono text-xs">Rp 100.000</p>
+                    </div>
+                    <span class="text-xs font-black text-gray-500 group-hover:text-emerald-400 bg-white/5 px-2 py-1 rounded">10.000 PTS</span>
+                </button>
+                <button onclick="processRedeem('Paket Sembako')" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl hover:bg-emerald-500/20 hover:border-emerald-500/50 transition-all flex items-center justify-between group">
+                    <div>
+                        <p class="text-white font-bold text-sm">Paket Sembako</p>
+                        <p class="text-emerald-400 font-mono text-xs">Premium</p>
+                    </div>
+                    <span class="text-xs font-black text-gray-500 group-hover:text-emerald-400 bg-white/5 px-2 py-1 rounded">15.000 PTS</span>
+                </button>
+            </div>
+
+            <button onclick="closeRedeemModal()" class="text-gray-500 hover:text-white transition-colors font-bold text-xs uppercase tracking-widest">Batalkan</button>
+        </div>
+    </div>
+
+    <script>
+        function openRedeemModal() {
+            const modal = document.getElementById('modal-redeem');
+            const content = document.getElementById('modal-redeem-content');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                content.classList.remove('scale-95');
+                content.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeRedeemModal() {
+            const modal = document.getElementById('modal-redeem');
+            const content = document.getElementById('modal-redeem-content');
+            modal.classList.add('opacity-0');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 300);
+        }
+
+        function processRedeem(item) {
+            closeRedeemModal();
+            setTimeout(() => {
+                alert(`Permintaan penukaran ${item} sedang diproses. Hadiah akan dikirimkan ke kontak Anda.`);
+            }, 350);
+        }
+
+        window.onclick = function(event) {
+            const modalRedeem = document.getElementById('modal-redeem');
+            if (event.target == modalRedeem) {
+                closeRedeemModal();
+            }
+        }
+    </script>
 </x-app-layout>

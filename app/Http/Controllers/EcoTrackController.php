@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\EcoTrack;
-use App\Models\Update; 
+use App\Models\Update;  
 use Illuminate\Http\Request;
 
 class EcoTrackController extends Controller
