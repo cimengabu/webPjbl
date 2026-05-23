@@ -11,11 +11,16 @@ class EcoTrack extends Model
 
     // Tambahkan ini supaya bisa input data ke database
     protected $fillable = [
-    'user_id', 
-    'item_name', 
-    'qr_code', 
-    'status', 
-    'points', 
-    'weight'
-];
+        'user_id', 
+        'item_name', 
+        'qr_code', 
+        'status', 
+        'points', 
+        'weight'
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

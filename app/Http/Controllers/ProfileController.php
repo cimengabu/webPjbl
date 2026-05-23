@@ -18,7 +18,7 @@ class ProfileController extends Controller
     {
         $user = $request->user();
         $history = $user->ecoTracks()->latest()->get();
-        $totalPoints = $history->sum('points');
+        $totalPoints = $user->total_points ?? 0;
         
         $badge = 'Newcomer';
         $badgeColor = 'bg-gray-100 text-gray-600 border-gray-200';
@@ -56,6 +56,33 @@ class ProfileController extends Controller
         $request->user()->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    }
+
+    /**
+     * Update the user's profile and background photos.
+     */
+    public function updatePhotos(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'profile_photo' => ['nullable', 'image', 'max:2048'],
+            'background_photo' => ['nullable', 'image', 'max:5120'],
+        ]);
+
+        $user = $request->user();
+
+        if ($request->hasFile('profile_photo')) {
+            $path = $request->file('profile_photo')->store('profile-photos', 'public');
+            $user->profile_photo_path = $path;
+        }
+
+        if ($request->hasFile('background_photo')) {
+            $path = $request->file('background_photo')->store('background-photos', 'public');
+            $user->background_photo_path = $path;
+        }
+
+        $user->save();
+
+        return Redirect::route('profile.edit')->with('status', 'photos-updated');
     }
 
     /**

@@ -1,8 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-black text-3xl text-white tracking-tight">
-            {{ __('Peta Bank Sampah') }}
-        </h2>
+        <div class="flex items-center gap-4">
+            <x-back-button fallback="{{ route('home') }}" />
+            <h2 class="font-black text-3xl text-white tracking-tight">
+                {{ __('Peta Bank Sampah') }}
+            </h2>
+        </div>
     </x-slot>
 
     <!-- Leaflet CSS -->
@@ -44,6 +47,19 @@
                             <h3 class="text-2xl font-black text-white tracking-tight">Temukan Pusat Daur Ulang Terdekat</h3>
                             <p class="text-emerald-400/80 text-sm font-medium mt-1">Gunakan peta interaktif di bawah ini untuk mencari lokasi bank sampah terdekat beserta jenis sampah yang mereka terima.</p>
                         </div>
+                        <div class="ml-auto">
+                            @auth
+                                <button onclick="openReportModal()" class="bg-red-500/20 hover:bg-red-500/40 border border-red-500/50 text-red-400 px-4 py-2 rounded-xl text-sm font-bold transition-colors flex items-center gap-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                    Lapor Fasilitas
+                                </button>
+                            @else
+                                <a href="{{ route('login') }}" class="bg-red-500/20 hover:bg-red-500/40 border border-red-500/50 text-red-400 px-4 py-2 rounded-xl text-sm font-bold transition-colors flex items-center gap-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                    Lapor Fasilitas
+                                </a>
+                            @endauth
+                        </div>
                     </div>
                     
                     <!-- Peta Container -->
@@ -53,12 +69,48 @@
         </div>
     </div>
 
+    {{-- Report Modal --}}
+    <div id="modal-report" class="fixed inset-0 bg-black/90 backdrop-blur-md hidden items-center justify-center z-50 p-4 transition-all opacity-0 duration-300">
+        <div class="bg-zinc-900 border border-red-500/30 p-8 rounded-[2.5rem] w-full max-w-md shadow-[0_0_100px_rgba(239,68,68,0.2)] transform scale-95 transition-transform duration-300" id="modal-report-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-black italic text-white uppercase tracking-tighter">Lapor Fasilitas</h3>
+                <button onclick="closeReportModal()" class="text-gray-500 hover:text-white transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            
+            <form action="{{ route('reports.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
+                @csrf
+                <div>
+                    <label class="block text-[10px] font-black uppercase tracking-widest text-red-400 mb-2">Lokasi / Nama Bank Sampah</label>
+                    <input type="text" name="location" required placeholder="Contoh: Bank Sampah Melati" class="w-full bg-[#050B14] border border-white/10 rounded-2xl p-4 text-white focus:border-red-500 focus:ring focus:ring-red-500/20 outline-none transition-all">
+                </div>
+                
+                <div>
+                    <label class="block text-[10px] font-black uppercase tracking-widest text-red-400 mb-2">Deskripsi Masalah</label>
+                    <textarea name="description" required rows="3" placeholder="Fasilitas tutup, penuh, rusak, dll..." class="w-full bg-[#050B14] border border-white/10 rounded-2xl p-4 text-white focus:border-red-500 focus:ring focus:ring-red-500/20 outline-none transition-all"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-black uppercase tracking-widest text-red-400 mb-2">Foto Bukti</label>
+                    <input type="file" name="photo" accept="image/*" required class="w-full bg-[#050B14] border border-white/10 rounded-2xl p-4 text-white focus:border-red-500 focus:ring focus:ring-red-500/20 outline-none transition-all file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-red-500/20 file:text-red-400 hover:file:bg-red-500/30">
+                </div>
+                
+                <div class="pt-4">
+                    <button type="submit" class="w-full bg-red-600 text-white font-black py-4 rounded-2xl uppercase tracking-[0.2em] hover:bg-red-500 transition-all shadow-[0_0_20px_rgba(239,68,68,0.3)] active:scale-95 text-sm">
+                        Kirim Laporan
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize the map centered around Jakarta (default focus)
-            var map = L.map('map').setView([-6.200000, 106.816666], 11);
+            // Initialize the map centered around Indonesia (default focus)
+            var map = L.map('map').setView([-0.7893, 113.9213], 5);
 
             // Set up the OSM layer
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -84,10 +136,14 @@
                     </div>
                 `;
 
+                var isBank = center.name.toLowerCase().includes('bank');
+                var color = isBank ? '#10b981' : '#eab308'; // Hijau untuk Bank, Kuning untuk Tempat Daur Ulang
+                var shadowColor = isBank ? 'rgba(16,185,129,0.8)' : 'rgba(234,179,8,0.8)';
+
                 // Create a custom pulsing marker icon
                 var customIcon = L.divIcon({
                     className: 'custom-div-icon',
-                    html: "<div style='background-color:#10b981; width:16px; height:16px; border-radius:50%; border:3px solid #050b14; box-shadow: 0 0 15px rgba(16,185,129,0.8);'></div>",
+                    html: "<div style='background-color:" + color + "; width:16px; height:16px; border-radius:50%; border:3px solid #050b14; box-shadow: 0 0 15px " + shadowColor + ";'></div>",
                     iconSize: [20, 20],
                     iconAnchor: [10, 10]
                 });
@@ -118,5 +174,41 @@
                 L.marker(e.latlng, {icon: userIcon}).addTo(map).bindPopup("<div style='color:#3b82f6; font-weight:bold;'>Lokasi Anda</div>").openPopup();
             });
         });
+
+        // Report Modal Functions
+        function openReportModal() {
+            const modal = document.getElementById('modal-report');
+            const content = document.getElementById('modal-report-content');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                if(content) {
+                    content.classList.remove('scale-95');
+                    content.classList.add('scale-100');
+                }
+            }, 10);
+        }
+
+        function closeReportModal() {
+            const modal = document.getElementById('modal-report');
+            const content = document.getElementById('modal-report-content');
+            modal.classList.add('opacity-0');
+            if(content) {
+                content.classList.remove('scale-100');
+                content.classList.add('scale-95');
+            }
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 300);
+        }
+
+        window.onclick = function(event) {
+            const modalReport = document.getElementById('modal-report');
+            if (event.target == modalReport) {
+                closeReportModal();
+            }
+        }
     </script>
 </x-app-layout>

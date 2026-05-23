@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Tabel sessions sudah dibuat di 0001_01_01_000000_create_users_table.php
-        // Migration ini sengaja dikosongkan untuk menghindari error "Table already exists"
+        Schema::table('users', function (Blueprint $table) {
+            $table->integer('total_points')->default(0);
+        });
     }
 
     /**
@@ -20,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // No-op
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('total_points');
+        });
     }
 };
