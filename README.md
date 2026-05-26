@@ -1,58 +1,69 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🍃 EcoTrack - Full-Stack AI-Integrated Waste Management Platform
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<div align="center">
 
-## About Laravel
+[![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com)
+[![Vite](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)](https://vitejs.dev)
+[![EcoTrack Version](https://img.shields.io/badge/Version-V3.0-green.svg?style=for-the-badge&logo=eco&logoColor=white)](https://github.com/cimengabu/webPjbl)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+> Sebuah solusi digital berbasis *web* yang canggih untuk mengelola dan memantau pengelolaan sampah, kini diperbarui ke versi 3.0 dengan integrasi teknologi masa depan. Proyek ini dibangun sebagai pemenuhan tugas Project Based Learning (PjBL) Rekayasa Perangkat Lunak (RPL).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+</div>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 📖 Tentang Proyek (EcoTrack v3.0)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**EcoTrack** adalah inisiatif digital berbasis web yang revolusioner, dirancang untuk membantu pengguna melacak, mengelola, dan meningkatkan gaya hidup ramah lingkungan mereka dengan cara yang interaktif dan bermanfaat. Dibangun dengan fokus utama pada kebersihan desain antarmuka (UI/UX) yang modern dan responsif, EcoTrack kini telah berevolusi menjadi versi 3.0 dengan menambahkan fitur-fitur berteknologi tinggi seperti integrasi AI dan *smart logistics*.
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Proyek ini memanfaatkan kerangka kerja Laravel di sisi *backend* untuk pemrosesan data yang tangguh dan Tailwind CSS di sisi *frontend* untuk kebebasan desain yang maksimal. Kombinasi ini menciptakan aplikasi yang tidak hanya berfungsi dengan baik, tetapi juga interaktif, intuitif, dan nyaman digunakan di berbagai perangkat.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## 📸 Tangkapan Layar Aplikasi
 
-## Agentic Development
+*Berikut adalah tampilan dasbor utama EcoTrack v3.0, yang menunjukkan kebersihan desain dalam mode gelap dengan aksen hijau-teal yang vibrant.*
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+| Dasbor Utama (Dashboard) |
+| :---: |
+| <img src="screenshots/dashboard.png" alt="EcoTrack Dashboard" width="100%"> |
 
-```bash
-composer require laravel/boost --dev
+*(Catatan: Langkah-langkah untuk mengganti link `screenshots/dashboard.png` dengan screenshot asli kamu ada di bawah)*
 
-php artisan boost:install
-```
+## ✨ Fitur Utama EcoTrack v3.0
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 🌍 Fitur Berbasis Komunitas (Community-Centric)
+- 🗺️ **Peta Bank Sampah Interaktif:** Pengguna dapat dengan mudah menemukan lokasi Bank Sampah terdekat di peta interaktif.
+- ♻️ **Daftar & Deposit Sampah (Waste Bank Integration):** Sistem terintegrasi yang memungkinkan pengguna mendaftarkan jenis sampah mereka dan menyetorkannya ke bank sampah.
+- 💰 **Manajemen Saldo (Tarik Saldo):** Saldo dari hasil setor sampah dapat dipantau dan ditarik oleh pengguna secara mandiri.
+- 🚚 **Request Penjemputan (Pickup Request):** Layanan permintaan penjemputan sampah langsung ke lokasi pengguna.
 
-## Contributing
+### 🎮 Gamifikasi & Reward System (Eco-Points)
+- 📊 **Dasbor Eco-Points Personal:** Dasbor khusus yang menampilkan total poin yang dikumpulkan dari aktivitas ramah lingkungan.
+- 💵 **Penarikan Poin (Withdraw Eco-Points):** Sistem penarikan poin yang memungkinkan pengguna menukarkan Eco-Points mereka dengan hadiah atau uang tunai.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 💻 Teknologi Canggih & UI/UX (Full-Stack Innovation)
+- 🎨 **Antarmuka "Modern Dark Mode":** Desain UI mode gelap yang elegan dan bersih dengan palet warna bertema alam.
+- 📱 **Mobile-First & Fully Responsive:** Dioptimalkan untuk kenyamanan penggunaan mulai dari layar *smartphone* hingga monitor *desktop* lebar.
+- ⚡ **SPA-like Experience with Vite:** Kompilasi aset frontend yang sangat cepat dan pengalaman berpindah halaman yang mulus.
+- 🤖 **Integrasi AI (Waste Scanner v2):** Fitur pemindai sampah berbasis AI yang dapat mengidentifikasi jenis sampah secara otomatis. (Detail teknis ada di footer tangkapan layar!)
+- 🚐 **Smart Pickup Logistics:** Sistem logistik penjemputan cerdas untuk efisiensi rute dan jadwal penjemputan.
+- 📡 **Real-Time Node Service:** Dukungan layanan node real-time (API node status: `NODE: ACTIVE`) untuk pembaruan data instan.
 
-## Code of Conduct
+## 🛠️ Persyaratan Sistem (System Prerequisites)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Pastikan perangkat lunak berikut sudah terinstal di komputermu:
+- **PHP** (Versi 8.1 atau lebih baru)
+- **Composer** (Dependency Manager PHP)
+- **Node.js & NPM** (Untuk kompilasi aset Tailwind/Vite)
+- **MySQL Database** (Melalui XAMPP / Laragon)
+- **Git**
 
-## Security Vulnerabilities
+## 🚀 Cara Instalasi & Menjalankan di Localhost
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Ikuti langkah-langkah berikut untuk mengkloning dan menjalankan proyek EcoTrack di komputermu:
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1. **Clone repositori ini**
+   ```bash
+   git clone [https://github.com/cimengabu/webPjbl.git](https://github.com/cimengabu/webPjbl.git)
+   cd webPjbl
