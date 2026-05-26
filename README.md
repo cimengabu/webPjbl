@@ -26,7 +26,7 @@ Proyek ini memanfaatkan kerangka kerja Laravel di sisi *backend* untuk pemrosesa
 
 | Dasbor Utama (Dashboard) |
 | :---: |
-| <img src="screenshots/dashboard.png" alt="EcoTrack Dashboard" width="100%"> |
+| <img src="public/screenshoot/dashboard.png" alt="EcoTrack Dashboard" width="100%">|
 
 *(Catatan: Langkah-langkah untuk mengganti link `screenshots/dashboard.png` dengan screenshot asli kamu ada di bawah)*
 
