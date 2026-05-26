@@ -113,16 +113,50 @@ Ikuti langkah-langkah di bawah ini untuk menjalankan EcoTrack di lokal Anda:
 
 ## 🔐 Akun Akses (Untuk Testing)
 
-Untuk masuk ke mode Admin, kunjungi URL berikut secara spesifik karena portal Admin tersembunyi dari navigasi publik:
-👉 **URL Admin:** `http://localhost:8000/admin/login`
+Sistem sudah memiliki Data Seeder bawaan. Anda dapat _login_ melalui halaman biasa (`http://localhost:8000/login`) menggunakan kredensial berikut:
 
-*(Gunakan akun admin yang telah Anda atur di database atau registrasikan secara manual via `tinker` dan set `is_admin = 1`)*.
+- **Admin:** `admin@ecotrack.id` | Password: `password`
+- **Member Biasa:** `user@ecotrack.id` | Password: `password`
+
+*(Akun Admin dapat mengakses fitur CRUD tambahan melalui menu "Manajemen Data" di bilah navigasi atas).*
 
 ---
 
 ## 📸 Tangkapan Layar (Screenshots)
 
-**(Anda dapat menambahkan screenshot aplikasi di sini nanti)*
+### 🔐 Halaman Autentikasi
+<div align="center">
+  <img src="public/screenshoot/login.png" alt="Login" width="45%" />
+  <img src="public/screenshoot/register.png" alt="Register" width="45%" />
+</div>
+
+### 🏠 Beranda (Landing Page)
+<div align="center">
+  <img src="public/screenshoot/127.0.0.1_8000_.png" alt="Landing Page" width="80%" />
+  <br><br>
+  <img src="public/screenshoot/127.0.0.1_8000_%20(1).png" alt="Landing Page Section 1" width="45%" />
+  <img src="public/screenshoot/127.0.0.1_8000_%20(2).png" alt="Landing Page Section 2" width="45%" />
+</div>
+
+### 📊 Dashboard Pengguna
+<div align="center">
+  <img src="public/screenshoot/127.0.0.1_8000_dashboard.png" alt="Dashboard Full" width="80%" />
+  <br><br>
+  <img src="public/screenshoot/dashboard.png" alt="Dashboard 1" width="45%" />
+  <img src="public/screenshoot/dashboard2.png" alt="Dashboard 2" width="45%" />
+  <br><br>
+  <img src="public/screenshoot/dashboard3.png" alt="Dashboard 3" width="45%" />
+  <img src="public/screenshoot/dashboard4.png" alt="Dashboard 4" width="45%" />
+</div>
+
+### 🌍 Fitur Utama & Profil
+<div align="center">
+  <img src="public/screenshoot/peta.png" alt="Peta Bank Sampah" width="45%" />
+  <img src="public/screenshoot/127.0.0.1_8000_profile.png" alt="Profil Pengguna" width="45%" />
+  <br><br>
+  <img src="public/screenshoot/laporan%20.png" alt="Laporan Lingkungan" width="45%" />
+  <img src="public/screenshoot/tarik%20saldo.png" alt="Tarik Saldo" width="45%" />
+</div>
 
 <br>
 
@@ -130,3 +164,4 @@ Untuk masuk ke mode Admin, kunjungi URL berikut secara spesifik karena portal Ad
 <div align="center">
   <p>Dibuat dengan ❤️ untuk pelestarian lingkungan.</p>
 </div>
+
