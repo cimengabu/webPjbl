@@ -10,10 +10,32 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password', 'contact', 'avatar', 'is_admin', 'total_points'])]
-#[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'contact',
+        'avatar',
+        'is_admin',
+        'total_points',
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 

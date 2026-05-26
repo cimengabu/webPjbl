@@ -42,11 +42,26 @@ Route::middleware('auth')->group(function () {
 
     // Admin Group
     Route::prefix('admin')->group(function () {
-        Route::get('/', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
         Route::patch('/pickups/{pickup}/status', [App\Http\Controllers\AdminController::class, 'updatePickupStatus'])->name('admin.pickups.status');
         Route::patch('/withdraws/{withdraw}/status', [App\Http\Controllers\AdminController::class, 'updateWithdrawStatus'])->name('admin.withdraws.status');
         Route::patch('/reports/{report}/status', [App\Http\Controllers\AdminController::class, 'updateReportStatus'])->name('admin.reports.status');
         Route::patch('/deposits/{ecotrack}/status', [App\Http\Controllers\AdminController::class, 'updateDepositStatus'])->name('admin.deposits.status');
+
+        // CRUD: Manajemen Pengguna
+        Route::resource('users', App\Http\Controllers\AdminUserController::class, [
+            'names' => 'admin.users'
+        ])->except(['show']);
+
+        // CRUD: Manajemen Artikel
+        Route::resource('articles', App\Http\Controllers\AdminArticleController::class, [
+            'names' => 'admin.articles'
+        ])->except(['show']);
+
+        // CRUD: Manajemen Bank Sampah
+        Route::resource('recycling-centers', App\Http\Controllers\AdminRecyclingCenterController::class, [
+            'names' => 'admin.recycling-centers',
+            'parameters' => ['recycling-centers' => 'recyclingCenter']
+        ])->except(['show']);
     });
 });
 

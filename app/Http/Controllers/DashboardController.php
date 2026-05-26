@@ -14,17 +14,25 @@ class DashboardController extends Controller
     {
         $user = auth()->user();
 
-        // Get user's own deposits
-        $deposits = EcoTrack::where('user_id', $user->id)->latest()->get();
+        // Fetch data differently based on user role
+        if ($user->is_admin) {
+            $deposits = EcoTrack::latest()->get();
+            $pickups = Pickup::with('user')->latest()->get();
+            $withdrawals = Withdraw::with('user')->latest()->get();
+            $reports = Report::latest()->get();
+        } else {
+            // Get user's own deposits
+            $deposits = EcoTrack::where('user_id', $user->id)->latest()->get();
 
-        // Get user's own pickups
-        $pickups = Pickup::where('user_id', $user->id)->latest()->get();
+            // Get user's own pickups
+            $pickups = Pickup::where('user_id', $user->id)->latest()->get();
 
-        // Get user's own withdrawals
-        $withdrawals = Withdraw::where('user_id', $user->id)->latest()->get();
+            // Get user's own withdrawals
+            $withdrawals = Withdraw::where('user_id', $user->id)->latest()->get();
 
-        // Get user's own facility reports (matched by username as per reports schema)
-        $reports = Report::where('user_name', $user->name)->latest()->get();
+            // Get user's own facility reports (matched by username as per reports schema)
+            $reports = Report::where('user_name', $user->name)->latest()->get();
+        }
 
         // Calculate total weight (completed pickups + deposits)
         $depositWeight = $deposits->sum('weight');

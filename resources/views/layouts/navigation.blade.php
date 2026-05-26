@@ -27,10 +27,17 @@
                         Dashboard
                     </a>
                     @if(Auth::user()->is_admin)
-                        <a href="{{ route('admin.dashboard') }}"
-                           class="text-red-400 hover:text-red-300 font-bold transition-colors text-sm">
-                            Admin Control
-                        </a>
+                        <div class="relative group">
+                            <button class="flex items-center gap-1 text-emerald-400 hover:text-emerald-300 font-bold transition-colors text-sm">
+                                Manajemen Data
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div class="absolute left-0 mt-2 w-48 bg-[#050B14] border border-white/10 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                                <a href="{{ route('admin.users.index') }}" class="block px-4 py-3 text-sm text-gray-300 hover:bg-white/5 hover:text-white rounded-t-xl">Data Pengguna</a>
+                                <a href="{{ route('admin.articles.index') }}" class="block px-4 py-3 text-sm text-gray-300 hover:bg-white/5 hover:text-white">Data Artikel</a>
+                                <a href="{{ route('admin.recycling-centers.index') }}" class="block px-4 py-3 text-sm text-gray-300 hover:bg-white/5 hover:text-white rounded-b-xl">Data Bank Sampah</a>
+                            </div>
+                        </div>
                     @endif
                 @endauth
 
@@ -105,9 +112,18 @@
                 </a>
 
                 @if(Auth::user()->is_admin)
-                    <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-red-400 hover:bg-red-500/10 transition-all font-bold text-sm">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                        Admin Control
+                    <div class="px-4 py-2 text-[10px] font-black uppercase tracking-widest text-emerald-500 mt-4">Manajemen Data</div>
+                    <a href="{{ route('admin.users.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-emerald-400 hover:bg-emerald-500/10 transition-all font-medium text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                        Data Pengguna
+                    </a>
+                    <a href="{{ route('admin.articles.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-emerald-400 hover:bg-emerald-500/10 transition-all font-medium text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+                        Data Artikel
+                    </a>
+                    <a href="{{ route('admin.recycling-centers.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-emerald-400 hover:bg-emerald-500/10 transition-all font-medium text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.243-4.243a8 8 0 1111.314 0z"></path></svg>
+                        Data Bank Sampah
                     </a>
                 @endif
 
