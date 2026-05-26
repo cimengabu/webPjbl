@@ -1,71 +1,132 @@
-# 🍃 EcoTrack - Full-Stack AI-Integrated Waste Management Platform
-
 <div align="center">
+  <br />
+  <p>
+    <a href="https://github.com/cimengabu/webPjbl"><img src="https://img.shields.io/badge/Laravel-11.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel 11" /></a>
+    <a href="https://github.com/cimengabu/webPjbl"><img src="https://img.shields.io/badge/Tailwind_CSS-3.x-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" /></a>
+    <a href="https://github.com/cimengabu/webPjbl"><img src="https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.2+" /></a>
+  </p>
+  
+  # 🌿 EcoTrack Indonesia
 
-[![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
-[![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com)
-[![Vite](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)](https://vitejs.dev)
-[![EcoTrack Version](https://img.shields.io/badge/Version-V3.0-green.svg?style=for-the-badge&logo=eco&logoColor=white)](https://github.com/cimengabu/webPjbl)
-
-> Sebuah solusi digital berbasis *web* yang canggih untuk mengelola dan memantau pengelolaan sampah, kini diperbarui ke versi 3.0 dengan integrasi teknologi masa depan. Proyek ini dibangun sebagai pemenuhan tugas Project Based Learning (PjBL) Rekayasa Perangkat Lunak (RPL).
-
+  **Platform Manajemen Bank Sampah & Pelestarian Lingkungan Berbasis Web**
 </div>
 
 ---
 
-## 📖 Tentang Proyek (EcoTrack v3.0)
+## 📖 Deskripsi Proyek
+**EcoTrack** adalah aplikasi inovatif yang dirancang untuk mendorong masyarakat agar lebih peduli terhadap lingkungan melalui sistem manajemen bank sampah yang terintegrasi. Platform ini memberikan apresiasi (berupa *Eco-Points*) kepada pengguna setiap kali mereka melakukan aksi pelestarian, seperti mendepositkan sampah daur ulang atau melaporkan masalah lingkungan. Poin yang terkumpul dapat ditukarkan (*withdraw*) menjadi saldo *e-wallet*.
 
-**EcoTrack** adalah inisiatif digital berbasis web yang revolusioner, dirancang untuk membantu pengguna melacak, mengelola, dan meningkatkan gaya hidup ramah lingkungan mereka dengan cara yang interaktif dan bermanfaat. Dibangun dengan fokus utama pada kebersihan desain antarmuka (UI/UX) yang modern dan responsif, EcoTrack kini telah berevolusi menjadi versi 3.0 dengan menambahkan fitur-fitur berteknologi tinggi seperti integrasi AI dan *smart logistics*.
+Proyek ini dibangun menggunakan **Laravel 11** dan **Tailwind CSS**, dengan antarmuka (*UI*) yang dirancang sangat modern, interaktif, dan premium.
 
-Proyek ini memanfaatkan kerangka kerja Laravel di sisi *backend* untuk pemrosesan data yang tangguh dan Tailwind CSS di sisi *frontend* untuk kebebasan desain yang maksimal. Kombinasi ini menciptakan aplikasi yang tidak hanya berfungsi dengan baik, tetapi juga interaktif, intuitif, dan nyaman digunakan di berbagai perangkat.
+## ✨ Fitur Utama
 
-## 📸 Tangkapan Layar Aplikasi
+### 👤 Fitur Pengguna (Masyarakat)
+- **Dashboard Personal:** Melacak aktivitas pelestarian, total poin (PTS), dan *streak* lingkungan secara *real-time*.
+- **Setor Sampah (Deposit):** Menyetor sampah ke bank sampah terdekat untuk mendapatkan poin.
+- **Peta Lokasi Bank Sampah:** Menemukan lokasi bank sampah terdekat menggunakan peta interaktif (*Leaflet.js*).
+- **Request Penjemputan (Pickup):** Meminta agen menjemput sampah langsung dari rumah.
+- **Tarik Poin (Withdraw):** Menukarkan *Eco-Points* dengan saldo GoPay, OVO, atau DANA.
+- **Laporan Lingkungan:** Melaporkan kerusakan fasilitas, tumpukan sampah liar, atau polusi di sekitar untuk mendapatkan poin tambahan.
+- **Artikel Edukasi:** Membaca artikel terkait pelestarian lingkungan untuk menambah wawasan.
 
-*Berikut adalah tampilan dasbor utama EcoTrack v3.0, yang menunjukkan kebersihan desain dalam mode gelap dengan aksen hijau-teal yang vibrant.*
+### 🛡️ Fitur Administrator (Portal Eksklusif)
+Admin memiliki portal akses mandiri (terpisah dari *frontend* publik) dengan keamanan ekstra dan tema *Crimson Dark* yang elegan.
+- **Dashboard Statistik:** Ringkasan total sampah terkumpul, jumlah *deposit*, dan *request* yang pending.
+- **Verifikasi Transaksi:** Menyetujui atau menolak *request* Penjemputan, Tarik Poin, dan Laporan.
+- **Manajemen Pengguna (CRUD):** Mengelola data seluruh pengguna terdaftar dan jumlah poin mereka.
+- **Manajemen Artikel (CRUD):** Mempublikasikan atau menyimpan *draft* konten edukasi ke *frontend*.
+- **Manajemen Bank Sampah (CRUD):** Menambah, mengubah, atau menghapus titik koordinat bank sampah dari sistem peta.
 
-| Dasbor Utama | 
-| :---: |
-| <img src="public/screenshoot/dashboard.png" alt="EcoTrack Dashboard 1" width="100%"> | 
-| <img src="public/screenshoot/dashboard2.png" alt="EcoTrack Dashboard 2" width="100%"> |
-| <img src="public/screenshoot/dashboard3.png" alt="EcoTrack Dashboard 3" width="100%"> |
-| <img src="public/screenshoot/dashboard4.png" alt="EcoTrack Dashboard 4" width="100%"> |
+---
 
+## 🛠️ Teknologi yang Digunakan
 
-## ✨ Fitur Utama EcoTrack v3.0
+* **Backend:** Laravel 11.x (PHP)
+* **Frontend:** Blade Templating, Tailwind CSS (Vanilla + PostCSS)
+* **Database:** MySQL / SQLite
+* **Map Engine:** Leaflet.js & OpenStreetMap
+* **Ikon:** Heroicons
 
-### 🌍 Fitur Berbasis Komunitas (Community-Centric)
-- 🗺️ **Peta Bank Sampah Interaktif:** Pengguna dapat dengan mudah menemukan lokasi Bank Sampah terdekat di peta interaktif.
-- ♻️ **Daftar & Deposit Sampah (Waste Bank Integration):** Sistem terintegrasi yang memungkinkan pengguna mendaftarkan jenis sampah mereka dan menyetorkannya ke bank sampah.
-- 💰 **Manajemen Saldo (Tarik Saldo):** Saldo dari hasil setor sampah dapat dipantau dan ditarik oleh pengguna secara mandiri.
-- 🚚 **Request Penjemputan (Pickup Request):** Layanan permintaan penjemputan sampah langsung ke lokasi pengguna.
+---
 
-### 🎮 Gamifikasi & Reward System (Eco-Points)
-- 📊 **Dasbor Eco-Points Personal:** Dasbor khusus yang menampilkan total poin yang dikumpulkan dari aktivitas ramah lingkungan.
-- 💵 **Penarikan Poin (Withdraw Eco-Points):** Sistem penarikan poin yang memungkinkan pengguna menukarkan Eco-Points mereka dengan hadiah atau uang tunai.
+## ⚙️ Persyaratan Sistem (*Prerequisites*)
 
-### 💻 Teknologi Canggih & UI/UX (Full-Stack Innovation)
-- 🎨 **Antarmuka "Modern Dark Mode":** Desain UI mode gelap yang elegan dan bersih dengan palet warna bertema alam.
-- 📱 **Mobile-First & Fully Responsive:** Dioptimalkan untuk kenyamanan penggunaan mulai dari layar *smartphone* hingga monitor *desktop* lebar.
-- ⚡ **SPA-like Experience with Vite:** Kompilasi aset frontend yang sangat cepat dan pengalaman berpindah halaman yang mulus.
-- 🤖 **Integrasi AI (Waste Scanner v2):** Fitur pemindai sampah berbasis AI yang dapat mengidentifikasi jenis sampah secara otomatis. (Detail teknis ada di footer tangkapan layar!)
-- 🚐 **Smart Pickup Logistics:** Sistem logistik penjemputan cerdas untuk efisiensi rute dan jadwal penjemputan.
-- 📡 **Real-Time Node Service:** Dukungan layanan node real-time (API node status: `NODE: ACTIVE`) untuk pembaruan data instan.
-
-## 🛠️ Persyaratan Sistem (System Prerequisites)
-
-Pastikan perangkat lunak berikut sudah terinstal di komputermu:
-- **PHP** (Versi 8.1 atau lebih baru)
-- **Composer** (Dependency Manager PHP)
-- **Node.js & NPM** (Untuk kompilasi aset Tailwind/Vite)
-- **MySQL Database** (Melalui XAMPP / Laragon)
+Pastikan Anda telah menginstal *software* berikut di perangkat Anda:
+- **PHP** >= 8.2
+- **Composer** (untuk dependensi backend)
+- **Node.js** & **NPM** (untuk *build* frontend)
+- **MySQL / MariaDB** (atau SQLite)
 - **Git**
 
-## 🚀 Cara Instalasi & Menjalankan di Localhost
+---
 
-Ikuti langkah-langkah berikut untuk mengkloning dan menjalankan proyek EcoTrack di komputermu:
+## 🚀 Panduan Instalasi
+
+Ikuti langkah-langkah di bawah ini untuk menjalankan EcoTrack di lokal Anda:
 
 1. **Clone repositori ini**
    ```bash
-   git clone [https://github.com/cimengabu/webPjbl.git](https://github.com/cimengabu/webPjbl.git)
+   git clone https://github.com/cimengabu/webPjbl.git
    cd webPjbl
+   ```
+
+2. **Instal dependensi PHP & Node.js**
+   ```bash
+   composer install
+   npm install
+   ```
+
+3. **Salin file environment & konfigurasi Database**
+   ```bash
+   cp .env.example .env
+   ```
+   > **Note:** Buka file `.env` yang baru dibuat dan sesuaikan konfigurasi database Anda (misal `DB_DATABASE=ecotrack`, username, password).
+
+4. **Generate Application Key**
+   ```bash
+   php artisan key:generate
+   ```
+
+5. **Migrasi Database**
+   ```bash
+   php artisan migrate
+   ```
+
+6. **Buat Symlink untuk Storage (Wajib untuk gambar artikel/profil)**
+   ```bash
+   php artisan storage:link
+   ```
+
+7. **Compile aset Frontend (Tailwind CSS)**
+   ```bash
+   npm run build
+   # atau gunakan 'npm run dev' untuk mode development
+   ```
+
+8. **Jalankan Server Lokal Laravel**
+   ```bash
+   php artisan serve
+   ```
+   Aplikasi sekarang dapat diakses melalui `http://localhost:8000`.
+
+---
+
+## 🔐 Akun Akses (Untuk Testing)
+
+Untuk masuk ke mode Admin, kunjungi URL berikut secara spesifik karena portal Admin tersembunyi dari navigasi publik:
+👉 **URL Admin:** `http://localhost:8000/admin/login`
+
+*(Gunakan akun admin yang telah Anda atur di database atau registrasikan secara manual via `tinker` dan set `is_admin = 1`)*.
+
+---
+
+## 📸 Tangkapan Layar (Screenshots)
+
+**(Anda dapat menambahkan screenshot aplikasi di sini nanti)*
+
+<br>
+
+---
+<div align="center">
+  <p>Dibuat dengan ❤️ untuk pelestarian lingkungan.</p>
+</div>
