@@ -34,11 +34,12 @@ class DashboardController extends Controller
         // CO2 offset estimate: 1.2 kg of CO2 saved per 1 kg of recycled waste
         $carbonSaved = $totalWeight * 1.2;
 
-        // Hitung streak harian dari aktivitas deposit
+        // Hitung streak harian dari aktivitas deposit menggunakan collection map untuk kompabilitas cross-database
         $streak = EcoTrack::where('user_id', $user->id)
-                    ->selectRaw('DATE(created_at) as date')
-                    ->groupBy('date')
                     ->get()
+                    ->groupBy(function($item) {
+                        return $item->created_at->format('Y-m-d');
+                    })
                     ->count();
 
         return view('dashboard', compact('deposits', 'pickups', 'withdrawals', 'reports', 'carbonSaved', 'totalWeight', 'streak'));

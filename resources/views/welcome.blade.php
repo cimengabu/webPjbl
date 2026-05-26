@@ -98,11 +98,23 @@
                     </div>
 
                     <!-- CTA BUTTON TO DASHBOARD -->
-                    <div class="mt-12 flex justify-center">
-                        <a href="{{ route('ecotrack.index') }}" class="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-emerald-500 text-black font-black text-xl rounded-full uppercase tracking-widest hover:bg-emerald-400 hover:scale-105 transition-all shadow-[0_0_30px_rgba(16,185,129,0.3)] hover:shadow-[0_0_50px_rgba(16,185,129,0.5)]">
-                            Enter Dashboard
-                            <svg class="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
-                        </a>
+                    <div class="mt-12 flex flex-col md:flex-row items-center justify-center gap-4">
+                        @auth
+                            <a href="{{ route('ecotrack.index') }}" class="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-emerald-500 text-black font-black text-xl rounded-full uppercase tracking-widest hover:bg-emerald-400 hover:scale-105 transition-all shadow-[0_0_30px_rgba(16,185,129,0.3)] hover:shadow-[0_0_50px_rgba(16,185,129,0.5)]">
+                                Enter Dashboard
+                                <svg class="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                            </a>
+                        @else
+                            <a href="{{ route('login') }}" class="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-emerald-500 text-black font-black text-xl rounded-full uppercase tracking-widest hover:bg-emerald-400 hover:scale-105 transition-all shadow-[0_0_30px_rgba(16,185,129,0.3)] hover:shadow-[0_0_50px_rgba(16,185,129,0.5)]">
+                                Login to Dashboard
+                            </a>
+                            <a href="{{ route('register') }}" class="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-transparent border border-white/20 text-white font-bold text-xl rounded-full uppercase tracking-widest hover:bg-white/10 hover:border-white/40 transition-all">
+                                Create Account
+                            </a>
+                            <a href="{{ route('ecotrack.index') }}" class="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-transparent border border-white/20 text-white font-bold text-xl rounded-full uppercase tracking-widest hover:bg-white/10 hover:border-white/40 transition-all">
+                                Guest Access
+                            </a>
+                        @endauth
                     </div>
                 </div>
             </div>

@@ -11,6 +11,7 @@ Route::get('/ecotrack', [EcoTrackController::class, 'index'])->name('ecotrack.in
 
 // Halaman Peta dan Artikel (publik)
 Route::get('/recycling-centers', [RecyclingCenterController::class, 'index'])->name('recycling-centers.index');
+Route::get('/api/recycling-centers/nearby', [RecyclingCenterController::class, 'nearby'])->name('api.recycling-centers.nearby');
 Route::get('/articles/{id}', [App\Http\Controllers\ArticleController::class, 'show'])->name('articles.show');
 
 Route::get('/photo-viewer', function () {
