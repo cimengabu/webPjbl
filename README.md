@@ -29,14 +29,6 @@ Proyek ini dibangun menggunakan **Laravel 11** dan **Tailwind CSS**, dengan anta
 - **Laporan Lingkungan:** Melaporkan kerusakan fasilitas, tumpukan sampah liar, atau polusi di sekitar untuk mendapatkan poin tambahan.
 - **Artikel Edukasi:** Membaca artikel terkait pelestarian lingkungan untuk menambah wawasan.
 
-### 🛡️ Fitur & Hak Akses Administrator
-Admin menggunakan gerbang _login_ dan tampilan *Dashboard* yang sama dengan pengguna publik (menyatu dengan mulus), namun sistem secara otomatis memberikan hak akses penuh:
-- **Visibilitas Data Global:** Melihat dan mengelola seluruh riwayat *deposit*, *request* penjemputan, dan laporan dari semua pengguna di *Dashboard*.
-- **Verifikasi Transaksi:** Menyetujui atau menolak *request* Penjemputan, Tarik Poin, dan Laporan.
-- **Manajemen Pengguna (CRUD):** Mengelola data seluruh pengguna terdaftar dan mengawasi aktivitas mereka.
-- **Manajemen Artikel (CRUD):** Mempublikasikan, mengedit, atau menghapus konten edukasi di *frontend*.
-- **Manajemen Bank Sampah (CRUD):** Menambah, mengubah, atau menghapus titik koordinat bank sampah dari sistem peta.
-
 ---
 
 ## 🛠️ Teknologi yang Digunakan
