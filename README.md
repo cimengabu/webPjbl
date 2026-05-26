@@ -24,8 +24,8 @@ Proyek ini memanfaatkan kerangka kerja Laravel di sisi *backend* untuk pemrosesa
 
 *Berikut adalah tampilan dasbor utama EcoTrack v3.0, yang menunjukkan kebersihan desain dalam mode gelap dengan aksen hijau-teal yang vibrant.*
 
-| Dasbor Utama (Bagian Atas) | Dasbor Utama (Bagian Bawah/Fitur Lain) |
-| :---: | :---: |
+| Dasbor Utama | 
+| :---: |
 | <img src="public/screenshoot/dashboard.png" alt="EcoTrack Dashboard 1" width="100%"> | 
 | <img src="public/screenshoot/dashboard2.png" alt="EcoTrack Dashboard 2" width="100%"> |
 | <img src="public/screenshoot/dashboard3.png" alt="EcoTrack Dashboard 3" width="100%"> |
