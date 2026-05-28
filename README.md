@@ -103,17 +103,6 @@ Ikuti langkah-langkah di bawah ini untuk menjalankan EcoTrack di lokal Anda:
 
 ---
 
-## 🔐 Akun Akses (Untuk Testing)
-
-Sistem sudah memiliki Data Seeder bawaan. Anda dapat _login_ melalui halaman biasa (`http://localhost:8000/login`) menggunakan kredensial berikut:
-
-- **Admin:** `admin@ecotrack.id` | Password: `password`
-- **Member Biasa:** `user@ecotrack.id` | Password: `password`
-
-*(Akun Admin dapat mengakses fitur CRUD tambahan melalui menu "Manajemen Data" di bilah navigasi atas).*
-
----
-
 ## 📸 Tangkapan Layar (Screenshots)
 
 ### 🔐 Halaman Autentikasi
