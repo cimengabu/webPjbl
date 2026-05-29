@@ -44,6 +44,15 @@ Admin menggunakan gerbang _login_ dan tampilan *Dashboard* yang sama dengan peng
 * **Backend:** Laravel 11.x (PHP)
 * **Frontend:** Blade Templating, Tailwind CSS (Vanilla + PostCSS)
 * **Database:** MySQL / SQLite
+
+**Database Schema**
+
+| Table | Columns |
+|-------|---------|
+| `recycling_centers` | `id` (bigIncrements), `name` (string), `address` (string), `latitude` (decimal), `longitude` (decimal), `accepted_materials` (json), `maps_url` (string nullable), `created_at`, `updated_at` |
+
+The `maps_url` column stores the Google Maps link for each recycling center, enabling direct navigation from the platform.
+
 * **Map Engine:** Leaflet.js & OpenStreetMap
 * **Ikon:** Heroicons
 
