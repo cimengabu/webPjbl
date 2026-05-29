@@ -49,7 +49,17 @@ Admin menggunakan gerbang _login_ dan tampilan *Dashboard* yang sama dengan peng
 
 | Table | Columns |
 |-------|---------|
-| `recycling_centers` | `id` (bigIncrements), `name` (string), `address` (string), `latitude` (decimal), `longitude` (decimal), `accepted_materials` (json), `maps_url` (string nullable), `created_at`, `updated_at` |
+| `users` | `id` (bigIncrements), `name` (string), `email` (string, unique), `email_verified_at` (timestamp, nullable), `password` (string), `remember_token` (string, nullable), `is_admin` (boolean, default false), `profile_photo_path` (string, nullable), `total_points` (integer, default 0), `created_at`, `updated_at` |
+| `password_reset_tokens` | `email` (string, primary), `token` (string), `created_at` (timestamp, nullable) |
+| `sessions` | `id` (string, primary), `user_id` (foreignId, nullable), `ip_address` (string, 45, nullable), `user_agent` (text, nullable), `payload` (longText), `last_activity` (integer) |
+| `recycling_centers` | `id` (bigIncrements), `name` (string), `address` (string), `latitude` (decimal), `longitude` (decimal), `accepted_materials` (json, nullable), `maps_url` (string, nullable), `created_at`, `updated_at` |
+| `reports` | `id` (bigIncrements), `user_name` (string), `photo` (string), `description` (text), `location` (string), `status` (enum: `pending`, `process`, `resolved`, default `pending`), `created_at`, `updated_at` |
+| `eco_activities` | `id` (bigIncrements), `user_id` (foreignId), `type` (enum: `deposit`, `pickup`, `withdraw`, `report`), `points` (integer), `description` (text, nullable), `created_at`, `updated_at` |
+| `eco_tracks` | `id` (bigIncrements), `user_id` (foreignId), `activity_id` (foreignId), `points` (integer), `created_at`, `updated_at` |
+| `withdraws` | `id` (bigIncrements), `user_id` (foreignId), `amount` (decimal), `status` (enum: `pending`, `approved`, `rejected`, default `pending`), `created_at`, `updated_at` |
+| `pickups` | `id` (bigIncrements), `user_id` (foreignId), `center_id` (foreignId), `schedule_at` (datetime), `status` (enum: `requested`, `scheduled`, `completed`, `cancelled`, default `requested`), `created_at`, `updated_at` |
+| `articles` | `id` (bigIncrements), `title` (string), `content` (longText), `image_path` (string, nullable), `author_id` (foreignId), `created_at`, `updated_at` |
+| `updates` | `id` (bigIncrements), `title` (string), `content` (text), `image_path` (string, nullable), `created_at`, `updated_at` |
 
 The `maps_url` column stores the Google Maps link for each recycling center, enabling direct navigation from the platform.
 
