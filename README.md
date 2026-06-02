@@ -41,114 +41,71 @@ Admin menggunakan gerbang _login_ dan tampilan *Dashboard* yang sama dengan peng
 
 ## 🔄 Alur Kerja Aplikasi (Flowchart)
 
-### 1. Alur Utama Pengguna
+### 1. Alur Navigasi Utama
 
 ```mermaid
 flowchart TD
-    START([Pengunjung]) --> LANDING[Landing Page - EcoTrack]
-    LANDING --> PUBLIC_MENU{Menu Publik}
-    PUBLIC_MENU --> PETA[Peta Bank Sampah - Leaflet.js]
-    PUBLIC_MENU --> ARTIKEL_LIST[Artikel Edukasi]
-    PUBLIC_MENU --> KOMUNITAS[Komunitas - Cari Profil User]
-    PUBLIC_MENU --> AUTH{Login / Register}
+    A([Pengunjung Baru]) --> B[Landing Page EcoTrack]
+    B --> C{Pilih Menu}
 
-    PETA --> NEARBY[Cari Bank Sampah Terdekat - Haversine]
-    ARTIKEL_LIST --> ARTIKEL_DETAIL[Baca Detail Artikel]
-    KOMUNITAS --> SEARCH[Cari Nama User]
-    SEARCH --> PROFIL_USER[Lihat Profil & Riwayat User]
+    C --> D[Peta Bank Sampah]
+    C --> E[Artikel Edukasi]
+    C --> F[Login / Register]
 
-    AUTH -->|Register| REG[Isi Nama, Email, Password]
-    REG --> LOGIN
-    AUTH -->|Login| LOGIN[Masukkan Email & Password]
-    LOGIN --> IS_ADMIN{Role User?}
+    D --> D1[Lihat Lokasi Bank Sampah di Peta]
+    D1 --> D2[Cari Bank Sampah Terdekat]
 
-    IS_ADMIN -->|User Biasa| DASHBOARD[Dashboard User]
-    IS_ADMIN -->|Admin| DASHBOARD_ADMIN[Dashboard Admin - Lihat Semua Data]
+    E --> E1[Baca Detail Artikel]
 
-    DASHBOARD --> D_DEPOSIT[Setor Sampah - Deposit]
-    DASHBOARD --> D_PICKUP[Request Penjemputan]
-    DASHBOARD --> D_REPORT[Lapor Masalah Lingkungan]
-    DASHBOARD --> D_WITHDRAW["Tarik Poin (Withdraw)"]
-    DASHBOARD --> D_PROFILE[Edit Profil & Foto]
+    F -->|Belum Punya Akun| G[Register - Isi Nama, Email, Password]
+    G --> H[Login]
+    F -->|Sudah Punya Akun| H[Login - Email dan Password]
+
+    H --> I[Dashboard Pengguna]
+
+    I --> J[Setor Sampah]
+    I --> K[Request Penjemputan]
+    I --> L[Lapor Masalah Lingkungan]
+    I --> M["Tarik Poin (Withdraw)"]
+    I --> N[Edit Profil dan Foto]
 ```
 
-### 2. Alur Deposit, Poin & Withdraw
+### 2. Alur Detail Setiap Fitur
 
 ```mermaid
 flowchart TD
-    DEP_START([User Login]) --> DEP_FORM[Isi Form Deposit]
-    DEP_FORM --> DEP_INPUT[Input: Jenis Sampah, QR Code, Berat]
-    DEP_INPUT --> DEP_CALC["Hitung Poin = Berat x Harga/Kg"]
-    DEP_CALC --> DEP_SAVE[Simpan ke Database - Status: AI Optimized]
-    DEP_SAVE --> DEP_POINTS[Poin Ditambahkan ke total_points User]
-    DEP_POINTS --> DEP_DASHBOARD[Tampil di Dashboard & Profil User]
+    subgraph DEPOSIT [Setor Sampah]
+        A1[Buka Form Deposit] --> A2[Pilih Jenis Sampah]
+        A2 --> A3[Masukkan QR Code dan Berat]
+        A3 --> A4[Sistem Hitung Poin Otomatis]
+        A4 --> A5[Data Tersimpan]
+        A5 --> A6[Poin Masuk ke Akun]
+    end
 
-    PICKUP_START([User Login]) --> PICKUP_FORM[Isi Form Penjemputan]
-    PICKUP_FORM --> PICKUP_INPUT[Input: Tanggal, Berat, Alamat]
-    PICKUP_INPUT --> PICKUP_SAVE[Simpan ke Database - Status: Pending]
-    PICKUP_SAVE --> PICKUP_WAIT["Menunggu Update Status Admin"]
-    PICKUP_WAIT --> PICKUP_STATUS{Status Diubah Admin}
-    PICKUP_STATUS --> PICKUP_SCHED[Scheduled]
-    PICKUP_STATUS --> PICKUP_DONE[Completed]
-    PICKUP_STATUS --> PICKUP_CANCEL[Cancelled]
+    subgraph PICKUP [Request Penjemputan]
+        B1[Buka Form Penjemputan] --> B2[Isi Tanggal Penjemputan]
+        B2 --> B3[Isi Estimasi Berat dan Alamat]
+        B3 --> B4[Kirim Request]
+        B4 --> B5[Status: Pending]
+        B5 --> B6[Menunggu Konfirmasi]
+    end
 
-    WD_START([User Login]) --> WD_CHECK{Poin Cukup? - Min. 50}
-    WD_CHECK -->|Tidak| WD_FAIL[Penarikan Gagal - Poin Tidak Cukup]
-    WD_CHECK -->|Ya| WD_FORM[Isi Form Withdraw]
-    WD_FORM --> WD_INPUT["Input: Metode (GoPay/OVO/DANA), Nominal, No. Rekening, Nama"]
-    WD_INPUT --> WD_DEDUCT[Poin Dikurangi dari total_points]
-    WD_DEDUCT --> WD_SAVE[Simpan ke Database - Status: Completed]
-    WD_SAVE --> WD_DONE([Dana Terkirim ke e-Wallet])
+    subgraph REPORT [Lapor Masalah Lingkungan]
+        C1[Buka Form Laporan] --> C2[Tulis Deskripsi Masalah]
+        C2 --> C3[Isi Lokasi Kejadian]
+        C3 --> C4[Upload Foto Bukti]
+        C4 --> C5[Kirim Laporan]
+        C5 --> C6[Status: Pending]
+    end
 
-    RPT_START([User Login]) --> RPT_FORM[Isi Form Laporan]
-    RPT_FORM --> RPT_INPUT[Input: Deskripsi, Lokasi, Upload Foto]
-    RPT_INPUT --> RPT_SAVE[Simpan ke Database - Status: pending]
-    RPT_SAVE --> RPT_WAIT["Menunggu Verifikasi Admin"]
-    RPT_WAIT --> RPT_STATUS{Status Diubah Admin}
-    RPT_STATUS --> RPT_PROC[process]
-    RPT_STATUS --> RPT_RESOLVED[resolved]
-```
-
-### 3. Alur Pengelolaan Admin
-
-```mermaid
-flowchart TD
-    ADM_START([Admin Login]) --> ADM_DASH[Dashboard Admin - Semua Data]
-
-    ADM_DASH --> ADM_DEP[Kelola Deposit]
-    ADM_DASH --> ADM_PICKUP[Kelola Penjemputan]
-    ADM_DASH --> ADM_WD[Kelola Withdraw]
-    ADM_DASH --> ADM_RPT[Kelola Laporan]
-    ADM_DASH --> ADM_USER[CRUD Pengguna]
-    ADM_DASH --> ADM_ART[CRUD Artikel]
-    ADM_DASH --> ADM_RC[CRUD Bank Sampah]
-
-    ADM_DEP --> DEP_ST{"Ubah Status Deposit"}
-    DEP_ST --> DEP_S1[Pending]
-    DEP_ST --> DEP_S2[AI Optimized]
-    DEP_ST --> DEP_S3[Verified]
-    DEP_ST --> DEP_S4[Completed]
-    DEP_ST --> DEP_S5[Rejected]
-
-    ADM_PICKUP --> PICK_ST{"Ubah Status Pickup"}
-    PICK_ST --> PICK_S1[Pending]
-    PICK_ST --> PICK_S2[Scheduled]
-    PICK_ST --> PICK_S3[Completed]
-    PICK_ST --> PICK_S4[Cancelled]
-
-    ADM_WD --> WD_ST{"Ubah Status Withdraw"}
-    WD_ST --> WD_S1[Pending]
-    WD_ST --> WD_S2[Completed]
-    WD_ST --> WD_S3["Rejected - Poin Dikembalikan"]
-
-    ADM_RPT --> RPT_ST{"Ubah Status Laporan"}
-    RPT_ST --> RPT_S1[pending]
-    RPT_ST --> RPT_S2[process]
-    RPT_ST --> RPT_S3[resolved]
-
-    ADM_USER --> USR_CRUD[Tambah / Edit / Hapus User]
-    ADM_ART --> ART_CRUD[Tambah / Edit / Hapus Artikel + Gambar]
-    ADM_RC --> RC_CRUD[Tambah / Edit / Hapus Titik Bank Sampah]
+    subgraph WITHDRAW [Tarik Poin]
+        D1[Buka Form Withdraw] --> D2{Poin Mencukupi?}
+        D2 -->|Tidak| D3[Penarikan Gagal]
+        D2 -->|Ya| D4[Pilih Metode: GoPay / OVO / DANA]
+        D4 --> D5[Isi Nominal dan No. Rekening]
+        D5 --> D6[Poin Dipotong dari Akun]
+        D6 --> D7[Dana Terkirim ke e-Wallet]
+    end
 ```
 
 ## 🛠️ Teknologi yang Digunakan
