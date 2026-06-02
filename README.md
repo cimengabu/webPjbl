@@ -49,21 +49,14 @@ flowchart TD
     LANDING --> PUBLIC_MENU{Menu Publik}
     PUBLIC_MENU --> PETA[Peta Bank Sampah - Leaflet.js]
     PUBLIC_MENU --> ARTIKEL_LIST[Artikel Edukasi]
-    PUBLIC_MENU --> KOMUNITAS[Komunitas - Cari Profil User]
     PUBLIC_MENU --> AUTH{Login / Register}
 
     PETA --> NEARBY[Cari Bank Sampah Terdekat - Haversine]
     ARTIKEL_LIST --> ARTIKEL_DETAIL[Baca Detail Artikel]
-    KOMUNITAS --> SEARCH[Cari Nama User]
-    SEARCH --> PROFIL_USER[Lihat Profil & Riwayat User]
 
     AUTH -->|Register| REG[Isi Nama, Email, Password]
     REG --> LOGIN
     AUTH -->|Login| LOGIN[Masukkan Email & Password]
-    LOGIN --> IS_ADMIN{Role User?}
-
-    IS_ADMIN -->|User Biasa| DASHBOARD[Dashboard User]
-    IS_ADMIN -->|Admin| DASHBOARD_ADMIN[Dashboard Admin - Lihat Semua Data]
 
     DASHBOARD --> D_DEPOSIT[Setor Sampah - Deposit]
     DASHBOARD --> D_PICKUP[Request Penjemputan]
@@ -107,48 +100,6 @@ flowchart TD
     RPT_WAIT --> RPT_STATUS{Status Diubah Admin}
     RPT_STATUS --> RPT_PROC[process]
     RPT_STATUS --> RPT_RESOLVED[resolved]
-```
-
-### 3. Alur Pengelolaan Admin
-
-```mermaid
-flowchart TD
-    ADM_START([Admin Login]) --> ADM_DASH[Dashboard Admin - Semua Data]
-
-    ADM_DASH --> ADM_DEP[Kelola Deposit]
-    ADM_DASH --> ADM_PICKUP[Kelola Penjemputan]
-    ADM_DASH --> ADM_WD[Kelola Withdraw]
-    ADM_DASH --> ADM_RPT[Kelola Laporan]
-    ADM_DASH --> ADM_USER[CRUD Pengguna]
-    ADM_DASH --> ADM_ART[CRUD Artikel]
-    ADM_DASH --> ADM_RC[CRUD Bank Sampah]
-
-    ADM_DEP --> DEP_ST{"Ubah Status Deposit"}
-    DEP_ST --> DEP_S1[Pending]
-    DEP_ST --> DEP_S2[AI Optimized]
-    DEP_ST --> DEP_S3[Verified]
-    DEP_ST --> DEP_S4[Completed]
-    DEP_ST --> DEP_S5[Rejected]
-
-    ADM_PICKUP --> PICK_ST{"Ubah Status Pickup"}
-    PICK_ST --> PICK_S1[Pending]
-    PICK_ST --> PICK_S2[Scheduled]
-    PICK_ST --> PICK_S3[Completed]
-    PICK_ST --> PICK_S4[Cancelled]
-
-    ADM_WD --> WD_ST{"Ubah Status Withdraw"}
-    WD_ST --> WD_S1[Pending]
-    WD_ST --> WD_S2[Completed]
-    WD_ST --> WD_S3["Rejected - Poin Dikembalikan"]
-
-    ADM_RPT --> RPT_ST{"Ubah Status Laporan"}
-    RPT_ST --> RPT_S1[pending]
-    RPT_ST --> RPT_S2[process]
-    RPT_ST --> RPT_S3[resolved]
-
-    ADM_USER --> USR_CRUD[Tambah / Edit / Hapus User]
-    ADM_ART --> ART_CRUD[Tambah / Edit / Hapus Artikel + Gambar]
-    ADM_RC --> RC_CRUD[Tambah / Edit / Hapus Titik Bank Sampah]
 ```
 
 ## 🛠️ Teknologi yang Digunakan
