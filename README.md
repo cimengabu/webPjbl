@@ -117,6 +117,105 @@ flowchart TD
     D9 --> D10[Transaksi Disimpan - Status: Completed]
     D10 --> D11([Selesai - Dana Terkirim ke e-Wallet])
 ```
+### 6. Alur Registrasi & Login
+
+```mermaid
+flowchart TD
+    E1([Pengunjung]) --> E2{Punya Akun?}
+
+    E2 -->|Belum| E3[Buka Halaman Register]
+    E3 --> E4[Isi Nama Lengkap]
+    E4 --> E5[Isi Alamat Email]
+    E5 --> E6[Buat Password dan Konfirmasi]
+    E6 --> E7{Validasi Data}
+    E7 -->|Gagal - Email sudah terdaftar| E8[Tampil Pesan Error]
+    E8 --> E3
+    E7 -->|Berhasil| E9[Akun Dibuat]
+    E9 --> E10[Redirect ke Login]
+
+    E2 -->|Sudah| E10[Buka Halaman Login]
+    E10 --> E11[Masukkan Email dan Password]
+    E11 --> E12{Autentikasi}
+    E12 -->|Gagal| E13[Tampil Pesan Kredensial Salah]
+    E13 --> E10
+    E12 -->|Berhasil| E14[Masuk ke Dashboard Pengguna]
+    E14 --> E15([Selesai - Siap Gunakan Aplikasi])
+```
+
+### 7. Alur Peta Bank Sampah
+
+```mermaid
+flowchart TD
+    F1([Mulai]) --> F2[Buka Halaman Peta Bank Sampah]
+    F2 --> F3[Peta Interaktif Leaflet.js Tampil]
+    F3 --> F4[Semua Titik Bank Sampah Ditampilkan]
+    F4 --> F5{Pilih Aksi}
+
+    F5 --> F6[Klik Marker di Peta]
+    F6 --> F7[Lihat Detail: Nama, Alamat, Jenis Sampah Diterima]
+    F7 --> F8[Buka Google Maps untuk Navigasi]
+
+    F5 --> F9[Cari Bank Sampah Terdekat]
+    F9 --> F10[Izinkan Akses Lokasi GPS]
+    F10 --> F11[Sistem Hitung Jarak dengan Formula Haversine]
+    F11 --> F12[Tampil Daftar Bank Sampah Terdekat beserta Jarak]
+    F12 --> F13([Selesai - Pilih Tujuan dan Navigasi])
+```
+
+### 8. Alur Edit Profil dan Foto
+
+```mermaid
+flowchart TD
+    G1([Mulai]) --> G2[Buka Halaman Profil]
+    G2 --> G3[Lihat Info Akun dan Badge Saat Ini]
+    G3 --> G4{Pilih yang Ingin Diubah}
+
+    G4 --> G5[Edit Nama atau Email]
+    G5 --> G6{Validasi Data}
+    G6 -->|Gagal| G7[Tampil Pesan Error]
+    G7 --> G5
+    G6 -->|Berhasil| G8[Data Profil Tersimpan]
+
+    G4 --> G9[Upload Foto Profil Baru]
+    G9 --> G10{File Valid - JPG/PNG maks 2MB?}
+    G10 -->|Tidak| G11[Tampil Pesan Error File]
+    G11 --> G9
+    G10 -->|Ya| G12[Foto Profil Tersimpan]
+
+    G4 --> G13[Upload Foto Latar Belakang]
+    G13 --> G14{File Valid - JPG/PNG maks 5MB?}
+    G14 -->|Tidak| G15[Tampil Pesan Error File]
+    G15 --> G13
+    G14 -->|Ya| G16[Foto Latar Tersimpan]
+
+    G8 --> G17([Selesai - Profil Diperbarui])
+    G12 --> G17
+    G16 --> G17
+```
+
+### 9. Alur Sistem Poin dan Badge
+
+```mermaid
+flowchart TD
+    H1([User Melakukan Aktivitas]) --> H2[Poin Bertambah ke total_points]
+    H2 --> H3{Berapa Total Poin?}
+
+    H3 -->|0 poin| H4[Badge: Newcomer]
+    H3 -->|Lebih dari 0 poin| H5[Badge: Bronze Saver]
+    H3 -->|Lebih dari atau sama dengan 10.000 poin| H6[Badge: Silver Recycler]
+    H3 -->|Lebih dari atau sama dengan 50.000 poin| H7[Badge: Gold Eco-Warrior]
+
+    H4 --> H8[Tampil di Profil Pengguna]
+    H5 --> H8
+    H6 --> H8
+    H7 --> H8
+
+    H8 --> H9{Tarik Poin?}
+    H9 -->|Ya| H10[Poin Dikurangi sesuai Jumlah Withdraw]
+    H10 --> H11[Badge Bisa Turun Jika Poin Berkurang]
+    H9 -->|Tidak| H12([Kumpulkan Poin Lebih Banyak])
+    H11 --> H12
+```
 
 ---
 
