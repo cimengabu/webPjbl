@@ -48,7 +48,7 @@ flowchart TD
     B --> C[Setor Sampah]
     B --> D[Request Penjemputan]
     B --> E[Lapor Masalah Lingkungan]
-    B --> F[Tarik Poin (Withdraw)]
+    B --> F["Tarik Poin (Withdraw)"]
     B --> G[Peta & Artikel Edukasi]
     
     C -->|Bawa ke Lokasi| H(Verifikasi Admin/Petugas)
