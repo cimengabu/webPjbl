@@ -39,6 +39,45 @@ Admin menggunakan gerbang _login_ dan tampilan *Dashboard* yang sama dengan peng
 
 ---
 
+## 🔄 Alur Kerja Aplikasi (Flowchart)
+
+```mermaid
+flowchart TD
+    A([Pengguna Umum]) -->|Registrasi / Login| B{Dashboard Aplikasi}
+    
+    B --> C[Setor Sampah]
+    B --> D[Request Penjemputan]
+    B --> E[Lapor Masalah Lingkungan]
+    B --> F[Tarik Poin (Withdraw)]
+    B --> G[Peta & Artikel Edukasi]
+    
+    C -->|Bawa ke Lokasi| H(Verifikasi Admin/Petugas)
+    D -->|Isi Form & Jadwal| I(Petugas Menjemput & Verifikasi)
+    E -->|Upload Foto & Deskripsi| J(Verifikasi Admin)
+    
+    H -->|Selesai / Valid| K[Poin Bertambah]
+    I -->|Selesai / Valid| K
+    J -->|Laporan Valid| K
+    
+    K --> L{Total Poin Cukup?}
+    
+    F -->|Request Withdraw| M(Admin Verifikasi Tarik Saldo)
+    L -->|Ya| M
+    
+    M -->|Disetujui| N([Saldo e-Wallet Terkirim])
+    
+    subgraph 🛡️ Panel Admin
+        H
+        I
+        J
+        M
+        O[Kelola Data Pengguna]
+        P[Kelola Data Bank Sampah & Artikel]
+    end
+```
+
+---
+
 ## 🛠️ Teknologi yang Digunakan
 
 * **Backend:** Laravel 11.x (PHP)
