@@ -41,27 +41,115 @@ Admin menggunakan gerbang _login_ dan tampilan *Dashboard* yang sama dengan peng
 
 ## 🔄 Alur Kerja Aplikasi (Flowchart)
 
+### 1. Alur Utama Pengguna
+
 ```mermaid
 flowchart TD
-    A([Pengguna Umum]) -->|Registrasi / Login| B{Dashboard Aplikasi}
-    
-    B --> C[Setor Sampah]
-    B --> D[Request Penjemputan]
-    B --> E[Lapor Masalah Lingkungan]
-    B --> F["Tarik Poin (Withdraw)"]
-    B --> G[Peta & Artikel Edukasi]
-    
-    C -->|Bawa ke Lokasi| K[Poin Bertambah]
-    D -->|Isi Form & Jadwal| K
-    E -->|Upload Foto & Deskripsi| K
-    
-    K --> L{Total Poin Cukup?}
-    
-    L -->|Ya| F
-    F -->|Request Withdraw| N([Saldo e-Wallet Terkirim])
+    START([Pengunjung]) --> LANDING[Landing Page - EcoTrack]
+    LANDING --> PUBLIC_MENU{Menu Publik}
+    PUBLIC_MENU --> PETA[Peta Bank Sampah - Leaflet.js]
+    PUBLIC_MENU --> ARTIKEL_LIST[Artikel Edukasi]
+    PUBLIC_MENU --> KOMUNITAS[Komunitas - Cari Profil User]
+    PUBLIC_MENU --> AUTH{Login / Register}
+
+    PETA --> NEARBY[Cari Bank Sampah Terdekat - Haversine]
+    ARTIKEL_LIST --> ARTIKEL_DETAIL[Baca Detail Artikel]
+    KOMUNITAS --> SEARCH[Cari Nama User]
+    SEARCH --> PROFIL_USER[Lihat Profil & Riwayat User]
+
+    AUTH -->|Register| REG[Isi Nama, Email, Password]
+    REG --> LOGIN
+    AUTH -->|Login| LOGIN[Masukkan Email & Password]
+    LOGIN --> IS_ADMIN{Role User?}
+
+    IS_ADMIN -->|User Biasa| DASHBOARD[Dashboard User]
+    IS_ADMIN -->|Admin| DASHBOARD_ADMIN[Dashboard Admin - Lihat Semua Data]
+
+    DASHBOARD --> D_DEPOSIT[Setor Sampah - Deposit]
+    DASHBOARD --> D_PICKUP[Request Penjemputan]
+    DASHBOARD --> D_REPORT[Lapor Masalah Lingkungan]
+    DASHBOARD --> D_WITHDRAW["Tarik Poin (Withdraw)"]
+    DASHBOARD --> D_PROFILE[Edit Profil & Foto]
 ```
 
----
+### 2. Alur Deposit, Poin & Withdraw
+
+```mermaid
+flowchart TD
+    DEP_START([User Login]) --> DEP_FORM[Isi Form Deposit]
+    DEP_FORM --> DEP_INPUT[Input: Jenis Sampah, QR Code, Berat]
+    DEP_INPUT --> DEP_CALC["Hitung Poin = Berat x Harga/Kg"]
+    DEP_CALC --> DEP_SAVE[Simpan ke Database - Status: AI Optimized]
+    DEP_SAVE --> DEP_POINTS[Poin Ditambahkan ke total_points User]
+    DEP_POINTS --> DEP_DASHBOARD[Tampil di Dashboard & Profil User]
+
+    PICKUP_START([User Login]) --> PICKUP_FORM[Isi Form Penjemputan]
+    PICKUP_FORM --> PICKUP_INPUT[Input: Tanggal, Berat, Alamat]
+    PICKUP_INPUT --> PICKUP_SAVE[Simpan ke Database - Status: Pending]
+    PICKUP_SAVE --> PICKUP_WAIT["Menunggu Update Status Admin"]
+    PICKUP_WAIT --> PICKUP_STATUS{Status Diubah Admin}
+    PICKUP_STATUS --> PICKUP_SCHED[Scheduled]
+    PICKUP_STATUS --> PICKUP_DONE[Completed]
+    PICKUP_STATUS --> PICKUP_CANCEL[Cancelled]
+
+    WD_START([User Login]) --> WD_CHECK{Poin Cukup? - Min. 50}
+    WD_CHECK -->|Tidak| WD_FAIL[Penarikan Gagal - Poin Tidak Cukup]
+    WD_CHECK -->|Ya| WD_FORM[Isi Form Withdraw]
+    WD_FORM --> WD_INPUT["Input: Metode (GoPay/OVO/DANA), Nominal, No. Rekening, Nama"]
+    WD_INPUT --> WD_DEDUCT[Poin Dikurangi dari total_points]
+    WD_DEDUCT --> WD_SAVE[Simpan ke Database - Status: Completed]
+    WD_SAVE --> WD_DONE([Dana Terkirim ke e-Wallet])
+
+    RPT_START([User Login]) --> RPT_FORM[Isi Form Laporan]
+    RPT_FORM --> RPT_INPUT[Input: Deskripsi, Lokasi, Upload Foto]
+    RPT_INPUT --> RPT_SAVE[Simpan ke Database - Status: pending]
+    RPT_SAVE --> RPT_WAIT["Menunggu Verifikasi Admin"]
+    RPT_WAIT --> RPT_STATUS{Status Diubah Admin}
+    RPT_STATUS --> RPT_PROC[process]
+    RPT_STATUS --> RPT_RESOLVED[resolved]
+```
+
+### 3. Alur Pengelolaan Admin
+
+```mermaid
+flowchart TD
+    ADM_START([Admin Login]) --> ADM_DASH[Dashboard Admin - Semua Data]
+
+    ADM_DASH --> ADM_DEP[Kelola Deposit]
+    ADM_DASH --> ADM_PICKUP[Kelola Penjemputan]
+    ADM_DASH --> ADM_WD[Kelola Withdraw]
+    ADM_DASH --> ADM_RPT[Kelola Laporan]
+    ADM_DASH --> ADM_USER[CRUD Pengguna]
+    ADM_DASH --> ADM_ART[CRUD Artikel]
+    ADM_DASH --> ADM_RC[CRUD Bank Sampah]
+
+    ADM_DEP --> DEP_ST{"Ubah Status Deposit"}
+    DEP_ST --> DEP_S1[Pending]
+    DEP_ST --> DEP_S2[AI Optimized]
+    DEP_ST --> DEP_S3[Verified]
+    DEP_ST --> DEP_S4[Completed]
+    DEP_ST --> DEP_S5[Rejected]
+
+    ADM_PICKUP --> PICK_ST{"Ubah Status Pickup"}
+    PICK_ST --> PICK_S1[Pending]
+    PICK_ST --> PICK_S2[Scheduled]
+    PICK_ST --> PICK_S3[Completed]
+    PICK_ST --> PICK_S4[Cancelled]
+
+    ADM_WD --> WD_ST{"Ubah Status Withdraw"}
+    WD_ST --> WD_S1[Pending]
+    WD_ST --> WD_S2[Completed]
+    WD_ST --> WD_S3["Rejected - Poin Dikembalikan"]
+
+    ADM_RPT --> RPT_ST{"Ubah Status Laporan"}
+    RPT_ST --> RPT_S1[pending]
+    RPT_ST --> RPT_S2[process]
+    RPT_ST --> RPT_S3[resolved]
+
+    ADM_USER --> USR_CRUD[Tambah / Edit / Hapus User]
+    ADM_ART --> ART_CRUD[Tambah / Edit / Hapus Artikel + Gambar]
+    ADM_RC --> RC_CRUD[Tambah / Edit / Hapus Titik Bank Sampah]
+```
 
 ## 🛠️ Teknologi yang Digunakan
 
