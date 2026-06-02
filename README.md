@@ -62,42 +62,60 @@ flowchart TD
     I --> N[Edit Profil dan Foto]
 ```
 
-### 2. Alur Detail Setiap Fitur
+### 2. Alur Setor Sampah (Deposit)
 
 ```mermaid
 flowchart TD
-    subgraph DEPOSIT [Setor Sampah]
-        A1[Buka Form Deposit] --> A2[Pilih Jenis Sampah]
-        A2 --> A3[Masukkan QR Code dan Berat]
-        A3 --> A4[Sistem Hitung Poin Otomatis]
-        A4 --> A5[Data Tersimpan]
-        A5 --> A6[Poin Masuk ke Akun]
-    end
+    A1([Mulai]) --> A2[Buka Form Deposit]
+    A2 --> A3[Pilih Jenis Sampah]
+    A3 --> A4[Masukkan QR Code Unik]
+    A4 --> A5[Masukkan Berat Sampah dalam kg]
+    A5 --> A6[Sistem Hitung Poin Otomatis - Berat x Harga per Kg]
+    A6 --> A7[Data Tersimpan di Database]
+    A7 --> A8[Poin Langsung Masuk ke Akun]
+    A8 --> A9([Selesai - Lihat Poin di Dashboard])
+```
 
-    subgraph PICKUP [Request Penjemputan]
-        B1[Buka Form Penjemputan] --> B2[Isi Tanggal Penjemputan]
-        B2 --> B3[Isi Estimasi Berat dan Alamat]
-        B3 --> B4[Kirim Request]
-        B4 --> B5[Status: Pending]
-        B5 --> B6[Menunggu Konfirmasi]
-    end
+### 3. Alur Request Penjemputan
 
-    subgraph REPORT [Lapor Masalah Lingkungan]
-        C1[Buka Form Laporan] --> C2[Tulis Deskripsi Masalah]
-        C2 --> C3[Isi Lokasi Kejadian]
-        C3 --> C4[Upload Foto Bukti]
-        C4 --> C5[Kirim Laporan]
-        C5 --> C6[Status: Pending]
-    end
+```mermaid
+flowchart TD
+    B1([Mulai]) --> B2[Buka Form Penjemputan]
+    B2 --> B3[Pilih Tanggal Penjemputan]
+    B3 --> B4[Isi Estimasi Berat Sampah]
+    B4 --> B5[Isi Alamat Penjemputan]
+    B5 --> B6[Kirim Request]
+    B6 --> B7[Status: Pending - Menunggu Konfirmasi]
+    B7 --> B8([Selesai - Pantau Status di Dashboard])
+```
 
-    subgraph WITHDRAW [Tarik Poin]
-        D1[Buka Form Withdraw] --> D2{Poin Mencukupi?}
-        D2 -->|Tidak| D3[Penarikan Gagal]
-        D2 -->|Ya| D4[Pilih Metode: GoPay / OVO / DANA]
-        D4 --> D5[Isi Nominal dan No. Rekening]
-        D5 --> D6[Poin Dipotong dari Akun]
-        D6 --> D7[Dana Terkirim ke e-Wallet]
-    end
+### 4. Alur Laporan Masalah Lingkungan
+
+```mermaid
+flowchart TD
+    C1([Mulai]) --> C2[Buka Form Laporan]
+    C2 --> C3[Tulis Deskripsi Masalah]
+    C3 --> C4[Isi Lokasi Kejadian]
+    C4 --> C5[Upload Foto Bukti - JPG / PNG maks 2MB]
+    C5 --> C6[Kirim Laporan]
+    C6 --> C7[Status: Pending]
+    C7 --> C8([Selesai - Pantau Status di Dashboard])
+```
+
+### 5. Alur Tarik Poin (Withdraw)
+
+```mermaid
+flowchart TD
+    D1([Mulai]) --> D2[Buka Form Withdraw]
+    D2 --> D3{Poin Mencukupi - Minimal 50?}
+    D3 -->|Tidak| D4[Tampil Pesan Gagal - Poin Tidak Cukup]
+    D4 --> D5([Selesai - Tambah Poin Dulu])
+    D3 -->|Ya| D6[Pilih Metode: GoPay / OVO / DANA]
+    D6 --> D7[Isi Jumlah Penarikan]
+    D7 --> D8[Isi Nomor dan Nama Rekening]
+    D8 --> D9[Poin Dipotong dari Akun]
+    D9 --> D10[Transaksi Disimpan - Status: Completed]
+    D10 --> D11([Selesai - Dana Terkirim ke e-Wallet])
 ```
 
 ---
