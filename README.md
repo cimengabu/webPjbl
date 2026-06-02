@@ -66,7 +66,7 @@ flowchart TD
     
     M -->|Disetujui| N([Saldo e-Wallet Terkirim])
     
-    subgraph 🛡️ Panel Admin
+    subgraph AdminPanel [Panel Admin]
         H
         I
         J
