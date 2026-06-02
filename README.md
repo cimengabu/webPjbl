@@ -51,29 +51,14 @@ flowchart TD
     B --> F["Tarik Poin (Withdraw)"]
     B --> G[Peta & Artikel Edukasi]
     
-    C -->|Bawa ke Lokasi| H(Verifikasi Admin/Petugas)
-    D -->|Isi Form & Jadwal| I(Petugas Menjemput & Verifikasi)
-    E -->|Upload Foto & Deskripsi| J(Verifikasi Admin)
-    
-    H -->|Selesai / Valid| K[Poin Bertambah]
-    I -->|Selesai / Valid| K
-    J -->|Laporan Valid| K
+    C -->|Bawa ke Lokasi| K[Poin Bertambah]
+    D -->|Isi Form & Jadwal| K
+    E -->|Upload Foto & Deskripsi| K
     
     K --> L{Total Poin Cukup?}
     
-    F -->|Request Withdraw| M(Admin Verifikasi Tarik Saldo)
-    L -->|Ya| M
-    
-    M -->|Disetujui| N([Saldo e-Wallet Terkirim])
-    
-    subgraph AdminPanel [Panel Admin]
-        H
-        I
-        J
-        M
-        O[Kelola Data Pengguna]
-        P[Kelola Data Bank Sampah & Artikel]
-    end
+    L -->|Ya| F
+    F -->|Request Withdraw| N([Saldo e-Wallet Terkirim])
 ```
 
 ---
